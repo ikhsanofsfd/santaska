@@ -1,0 +1,1026 @@
+/* ======================================= */
+/* 1. VARIABEL & RESET DASAR               */
+/* ======================================= */
+:root {
+  --primary-color: #00c6ff; /* Biru Cerah - Accent */
+  --secondary-color: #ff9900; /* Oranye/Kuning - Secondary Accent */
+  --bg-dark: #1e1e1e;
+  --text-light: #fff;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-faded: rgba(255, 255, 255, 0.7);
+  --year-x-color: #38a169; /* Hijau untuk Kelas 10 */
+  --year-xi-color: #f6ad55; /* Kuning untuk Kelas 11 */
+  --year-xii-color: #00c6ff; /* Biru untuk Kelas 12 */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-light);
+  background: var(--bg-dark);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ======================================= */
+/* 2. GLASSMORPHISM & BACKGROUND           */
+/* ======================================= */
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("BUKEN KELAS.jpg") no-repeat center center/cover;
+  filter: blur(10px);
+  z-index: -2;
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+}
+
+/* ======================================= */
+/* 3. LAYOUT UTAMA & SIDEBAR               */
+/* ======================================= */
+.main-container {
+  display: flex;
+  padding: 30px;
+  gap: 20px;
+}
+
+.sidebar-left {
+  width: 70px;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  height: fit-content;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.nav-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1.2em;
+  color: var(--text-light);
+  text-decoration: none;
+}
+.nav-icon.active {
+  background: var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+  color: var(--bg-dark);
+}
+
+.content-area {
+  flex-grow: 1;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Kritis: Sembunyikan versi Mobile Player di Desktop */
+.audio-player-container.mobile-only {
+  display: none;
+}
+/* ======================================= */
+/* 4. HEADER DAN NAVIGASI                  */
+/* ======================================= */
+.content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  border-radius: 15px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-light);
+  width: 300px;
+}
+.search-bar::placeholder {
+  color: var(--text-faded);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 25px;
+  margin: 0 40px;
+}
+
+.tab {
+  text-decoration: none;
+  color: var(--text-faded);
+  padding: 5px 0;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab.active {
+  color: var(--text-light);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.user-profile .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.section-description {
+  color: var(--text-faded);
+  margin-bottom: 40px;
+  font-style: italic;
+  border-left: 3px solid var(--primary-color);
+  padding-left: 15px;
+}
+
+/* ======================================= */
+/* 5. HOMEPAGE (Index.html Styles)         */
+/* ======================================= */
+
+.trending-card {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 350px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.trending-content {
+  padding: 40px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* --- GAYA IKON SOSIAL MEDIA --- */
+.social-links-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.5em;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  /* Glass Effect pada ikon */
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.1);
+  background: var(--primary-color);
+  color: var(--bg-dark);
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.5);
+}
+
+/* Warna default untuk ikon */
+.social-icon .fa-youtube {
+  color: #ff0000;
+}
+.social-icon .fa-spotify {
+  color: #1db954;
+}
+.social-icon .fa-tiktok {
+  color: #ee1d52;
+}
+.social-icon .fa-instagram {
+  color: #e1306c;
+}
+
+/* --- GAYA FOTO UTAMA --- */
+.trending-image-placeholder {
+  width: 40%;
+  background: linear-gradient(135deg, var(--primary-color), #0072ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8em;
+}
+
+.trending-image-placeholder.graduation-theme {
+  background: url("BUKEN KELAS.jpg") no-repeat center center/cover;
+  align-items: initial;
+  justify-content: initial;
+  font-size: initial;
+  width: 40%;
+}
+.trending-image-placeholder.graduation-theme i {
+  display: none;
+}
+
+/* Tombol (sudah diganti ikon, tapi gaya ini tetap untuk tombol lain) */
+.btn-primary {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  transition: background 0.3s;
+  background: var(--primary-color);
+  color: var(--bg-dark);
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-light);
+}
+
+/* Quick Links Grid */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Quick Links Card Styling */
+.link-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  position: relative;
+  padding: 20px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.link-card h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  z-index: 2;
+  position: relative;
+}
+
+.link-card p {
+  font-size: 0.85em;
+  color: var(--text-faded);
+  z-index: 2;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.link-card-thumbnail {
+  position: absolute;
+  bottom: -10px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: 0.6;
+  filter: saturate(0.5);
+  z-index: 1;
+  transform: rotate(10deg);
+}
+
+/* ======================================= */
+/* 6. ANGGOTA KELAS (anggota_kelas.html)   */
+/* ... (kode untuk halaman lain) ...       */
+/* ======================================= */
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.member-card {
+  position: relative;
+  padding: 30px 15px 15px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.member-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.member-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 15px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.member-card:hover .member-photo {
+  transform: scale(1.05);
+  border-color: var(--secondary-color);
+}
+
+.member-name {
+  flex-grow: 1;
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 1.1em;
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+
+.member-status {
+  font-size: 0.8em;
+  color: var(--primary-color);
+  background: rgba(0, 198, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.member-index {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+/* --- GAYA TAMBAHAN: KARTU FLIP 3D --- (di style.css) */
+.member-card {
+  position: relative;
+  padding: 0;
+  height: 350px; /* Tentukan tinggi kartu */
+  perspective: 1000px; /* Perspektif 3D */
+  border: none;
+  background: none;
+}
+
+.member-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.member-card:hover .member-card-inner {
+  transform: rotateY(180deg);
+}
+
+.member-card-front,
+.member-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  /* Terapkan Glass Effect dan Border pada setiap sisi */
+  background: var(--glass-bg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+  padding: 30px 15px 15px;
+  overflow: hidden;
+}
+
+.member-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Gaya Sisi Belakang */
+.member-card-back .back-title {
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+.member-card-back .quote {
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--text-faded);
+  margin: 10px 0 15px;
+  padding: 0 5px;
+}
+.member-card-back .back-info {
+  font-size: 0.85em;
+  color: var(--text-light);
+}
+
+/* KEMBALIKAN GAYA member-photo ke .member-card-front */
+.member-card-front .member-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 15px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.member-card:hover .member-card-front .member-photo {
+  transform: scale(1.05);
+  border-color: var(--secondary-color);
+}
+/* ... (lanjutkan dengan gaya .member-name, .member-index, dll. yang sudah ada) ... */
+
+/* ======================================= */
+/* 7. WALI KELAS (wali_kelas.html)         */
+/* ======================================= */
+
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.teacher-card {
+  position: relative;
+  padding: 30px 25px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.teacher-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+.teacher-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+}
+
+.teacher-card:hover .teacher-photo {
+  border-color: var(--secondary-color);
+}
+
+.teacher-info h3 {
+  margin: 0 0 5px 0;
+  color: var(--text-light);
+  font-size: 1.5em;
+}
+
+.teacher-info .role {
+  color: var(--primary-color);
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.teacher-info .quote {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.class-year {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: white;
+}
+
+.year-x {
+  background-color: var(--year-x-color);
+}
+.year-xi {
+  background-color: var(--year-xi-color);
+}
+.year-xii {
+  background-color: var(--year-xii-color);
+}
+
+/* ======================================= */
+/* 8. GALERI FOTO (galeri_kelas.html)      */
+/* ======================================= */
+
+.album-section {
+  margin-bottom: 50px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.album-section h3 {
+  color: var(--primary-color);
+  border-bottom: 2px solid rgba(0, 198, 255, 0.3);
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.album-desc {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.photo-card {
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.photo-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+}
+
+.photo-thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.photo-caption {
+  font-size: 0.9em;
+  color: var(--text-light);
+}
+
+/* ======================================= */
+/* 9. RESPONSIVITAS                        */
+/* ======================================= */
+
+/* --- Layar Tablet dan Laptop Kecil (Max Width 1024px) --- */
+@media (max-width: 1024px) {
+  .main-container {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .sidebar-left {
+    width: 60px;
+  }
+
+  .content-area {
+    padding: 20px;
+  }
+
+  /* Header */
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .search-bar {
+    width: 100%;
+    order: 1;
+  }
+  .nav-tabs {
+    margin: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+    order: 3;
+  }
+  .user-profile {
+    display: none;
+  }
+
+  /* Homepage: Tumpuk Vertikal di Tablet */
+  .trending-card {
+    flex-direction: column;
+    height: auto;
+  }
+  .trending-content {
+    width: 100%;
+    padding: 30px;
+    order: 2;
+  }
+  .trending-image-placeholder {
+    width: 100%;
+    height: 200px;
+    order: 1;
+    background-size: cover !important;
+  }
+
+  /* Quick Links */
+  .links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  /* Grid Anggota/Guru/Foto */
+  .member-grid,
+  .teacher-grid,
+  .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* --- Layar Mobile Kecil (Max Width 600px) --- */
+@media (max-width: 600px) {
+  /* FIX KRITIS: Matikan Flexbox di main-container untuk layout Fixed Bar */
+  .main-container {
+    display: block !important; /* KRITIS: Paksa display: block */
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* FIX KRITIS 1: Sidebar menjadi Top Fixed Bar */
+  .sidebar-left {
+    width: 100% !important;
+    height: 60px !important; /* Tinggi Top Bar */
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+
+    /* Posisi Fixed Top */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    padding: 0 10px !important;
+    z-index: 500 !important; /* Harus lebih tinggi dari semua konten */
+    border-radius: 0 !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+
+    /* Hapus sticky lama */
+    position: fixed !important;
+  }
+  .logo {
+    display: none !important;
+  }
+
+  /* FIX KRITIS 3: Konten HARUS DIDORONG (oleh Top Bar + Bottom Bar) */
+  .content-area {
+    /* Didorong oleh Top Fixed Bar (60px) */
+    margin-top: 60px !important;
+    /* Tambahkan padding-bottom agar tidak tertutup Audio Bar (60px) */
+    padding: 15px 15px 75px 15px !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+  }
+  @media (max-width: 600px) {
+    /* ... kode Top Fixed Nav Bar lainnya ... */
+
+    /* Penyesuaian padding konten agar tidak tertutup Fixed Bar */
+    .content-area {
+      /* Didorong oleh Top Fixed Bar (60px) */
+      margin-top: 60px !important;
+      /* Tambahkan padding-bottom agar tidak tertutup Audio Bar (60px) */
+      padding: 15px 15px 75px 15px !important;
+      /* ... lainnya ... */
+    }
+
+    /* ... kode di bawahnya ... */
+  }
+
+  /* Grid 1 Kolom Penuh di Mobile */
+  .links-grid,
+  .member-grid,
+  .teacher-grid,
+  .photo-grid {
+    grid-template-columns: 1fr !important; /* KRITIS */
+    gap: 15px !important;
+  }
+
+  /* Penyesuaian Foto Utama Mobile */
+  .trending-card {
+    flex-direction: column !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+  .trending-image-placeholder.graduation-theme {
+    width: 100% !important;
+    height: 250px !important; /* Sedikit dikecilkan agar terlihat proporsional */
+    border-radius: 10px 10px 0 0 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+  .trending-content {
+    padding: 20px !important;
+  }
+
+  /* Kartu Link Thumbnail Penuh (Perbaikan sebelumnya) */
+  .link-card-thumbnail {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    opacity: 0.2 !important;
+    filter: saturate(0.8) brightness(1.2) !important;
+    z-index: 1 !important;
+    transform: none !important;
+  }
+}
+/* ======================================= */
+/* 10. LIGHTBOX / MODAL FOTO & ANIMASI     */
+/* ======================================= */
+
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-content {
+  margin: auto;
+  display: block;
+  width: 90%;
+  max-width: 900px;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+  border-radius: 10px;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lightbox-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+@media only screen and (max-width: 700px) {
+  .lightbox-content {
+    width: 100%;
+  }
+}
+
+/* Animasi Transisi Halaman */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.main-container {
+  animation: fadeIn 0.4s ease-out;
+}
+/* ====================================================
+   CSS 1: LOADING BAR (Fitur 4)
+   ==================================================== */
+#loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #00bcd4; /* Warna cyan */
+  z-index: 9999;
+  transition: width 0.4s ease-out, opacity 0.5s;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+  opacity: 1;
+}
+
+#loading-bar.hidden {
+  opacity: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ====================================================
+   CSS 2: EFEK ANIMASI & DESAIN LANJUTAN (Fitur 4)
+   ==================================================== */
+
+/* Transisi Halaman (Pastikan ini ada untuk efek fade-in/out) */
+body {
+  transition: opacity 0.2s ease-in-out;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
+/* Animasi Sidebar Kiri (Glow Aktif) */
+.sidebar-left .nav-icon.active {
+  background-color: rgba(0, 188, 212, 0.2);
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.7); /* Efek glow */
+  border-left: 3px solid #00bcd4;
+}
+
+/* Efek Hover yang lebih kuat pada Kartu Link (untuk transisi halus Parallax) */
+.link-card.glass-effect {
+  transition: all 0.5s ease-out; /* Transisi halus untuk Parallax JS */
+  transform-style: preserve-3d;
+}
+
+.link-card.glass-effect:hover {
+  /* Catatan: Efek transform dan box-shadow di-handle oleh JavaScript (mousemove) */
+  /* Namun, transisi yang halus diatur di atas (.link-card.glass-effect) */
+}
+
+/* ====================================================
+   CSS 3: BUKU TAMU DIGITAL (Fitur 2)
+   ==================================================== */
+#guestbook {
+  padding: 40px;
+  margin-top: 40px;
+}
+
+.guestbook-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.post-message-card,
+#messages-list {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.post-message-card {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+#messages-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#message-input,
+#sender-input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+#message-input {
+  height: 100px;
+}
+
+#submit-message {
+  padding: 10px 20px;
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#submit-message:hover {
+  background-color: #008fa3;
+}
+
+.guestbook-message {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+}
+
+.guestbook-message p {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.guestbook-message small {
+  display: block;
+  text-align: right;
+  color: #ccc;
+  font-size: 0.9em;
+}
